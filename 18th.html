@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>18th Birthday Debut Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      background: #fff;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      animation: fadeIn 1.5s ease;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #d18b47;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .name {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 15px 0;
+      color: #333;
+    }
+    .details {
+      font-size: 1rem;
+      margin: 15px 0;
+      line-height: 1.6;
+    }
+    .highlight {
+      font-weight: 600;
+      color: #d18b47;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: #d18b47;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #b57436;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>You're Invited!</h1>
+    <h2>To the 18th Birthday Debut of</h2>
+
+    <div class="name">[Cousin's Name]</div>
+
+    <div class="details">
+      Join us as we celebrate a very special milestone ✨<br><br>
+      <span class="highlight">Date:</span> [Event Date]<br>
+      <span class="highlight">Time:</span> [Event Time]<br>
+      <span class="highlight">Venue:</span> [Event Venue]
+    </div>
+
+    <p>We would be honored by your presence 💖</p>
+
+    <button onclick="showMessage()">Confirm Attendance</button>
+  </div>
+
+  <script>
+    function showMessage() {
+      alert("Thank you! We look forward to celebrating with you 💕");
+    }
+  </script>
+</body>
+</html>
