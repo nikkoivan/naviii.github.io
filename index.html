@@ -9,13 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #7a0c0c, #9b111e, #b11226);
-      color: #4a2c2a;
-      overflow-x: hidden;
-    }
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #8b2f3c, #a63a4b, #c24f5c);
+  color: #4a2c2a;
+  overflow-x: hidden;
+}
 
     section {
       padding: 80px 20px;
@@ -186,7 +185,7 @@
     .ticket-screen {
       position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, #fde2e4, #fbcfe8);
+      background: radial-gradient(circle, #a63a4b, #8b2f3c, #5a141d);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -195,6 +194,7 @@
 
     /* Ticket */
     .ticket {
+      position: relative;
       display: flex;
       background: linear-gradient(145deg, #fffaf5, #fff1e6);
       border-radius: 28px;
@@ -258,6 +258,12 @@
       padding: 30px 20px;
       text-align: center;
       position: relative;
+
+      /* ADD THESE */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .admit {
@@ -269,6 +275,7 @@
     }
 
     .ticket-right button {
+      margin-top: 15px;
       padding: 12px 25px;
       border: none;
       border-radius: 30px;
@@ -300,24 +307,78 @@
       }
     }
 
+    .ticket .cut-left,
+    .ticket .cut-right {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      background: #8b2f3c;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .ticket .cut-left {
+      left: -13px;
+    }
+
+    .ticket .cut-right {
+      right: -13px;
+    }
+
+    body.ticket-open {
+      overflow: hidden;
+    }
+
+    /* ===== OPEN ANIMATION ===== */
+    .ticket {
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .ticket.opening {
+      transform: scale(1.15);
+      opacity: 0;
+    }
+
+    .invitation {
+      position: relative;
+      opacity: 0;
+      transform: translateY(80px);
+      transition: transform 1s ease, opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .invitation.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
   </style>
 </head>
-<body>
+<body class="ticket-open">
 
 <!-- OPENING INVITATION TICKET -->
 <div id="ticketScreen" class="ticket-screen">
-  <div class="ticket">
-    <div class="ticket-left">
-      <h1>18th Debut</h1>
-      <p class="subtitle">You are invited to celebrate</p>
-      <p class="celebrant">Fheb Angel XVIII</p>
-      <p class="tagline">A Night of Elegance & Dreams ✨</p>
-    </div>
+<div class="ticket">
 
-    <div class="ticket-right">
-      <button onclick="enterSite()">OPEN 💌</button>
-    </div>
+  <!-- ticket cut holes -->
+  <div class="cut-left"></div>
+  <div class="cut-right"></div>
+
+  <div class="ticket-left">
+    <h1>18th Debut</h1>
+    <p class="subtitle">You are invited to celebrate</p>
+    <p class="celebrant">Fheb Angel XVIII</p>
+    <p class="tagline">A Night of Elegance & Dreams ✨</p>
   </div>
+
+  <div class="ticket-right">
+    <span class="admit">ADMIT<br>ONE</span>
+    <button onclick="openInvitation()">OPEN 💌</button>
+  </div>
+</div> 
 </div>
 
 <!-- BACKGROUND MUSIC -->
@@ -325,6 +386,7 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 <div class="music-control" onclick="toggleMusic()">🎵</div>
+<div class="invitation">
 
 <!-- HERO -->
 <section>
@@ -335,8 +397,7 @@
 
     <div class="details">
       <span class="highlight">Date:</span> February 14, 2026<br>
-      <span class="highlight">Call Time:</span> 7:00 PM<br>
-      <span class="highlight">Program Starts:</span> 8:00 PM
+      <span class="highlight">Program Starts:</span> 7:00 PM
     </div>
   </div>
 </section>
@@ -451,17 +512,34 @@ Mjay • Rden • Robbin • Bello • Kuya Jong • Kuya Christian • Kuya Bil
       isPlaying = false;
     }
   }
-
-  // Enter Site
-  function enterSite() {
-    document.getElementById('ticketScreen').style.display = 'none';
-    music.play();
-    isPlaying = true;
-  }
 </script>
 
+<script>
+function openInvitation() {
+  const ticketScreen = document.getElementById("ticketScreen");
+  const ticket = document.querySelector(".ticket");
+  const invitation = document.querySelector(".invitation");
+
+  // Animate ticket
+  ticket.classList.add("opening");
+
+  // Prevent scrolling during transition
+  document.body.classList.add("ticket-open");
+
+  setTimeout(() => {
+    ticketScreen.style.display = "none";
+    invitation.classList.add("show");
+
+    // Allow scrolling
+    document.body.classList.remove("ticket-open");
+
+    // Play music
+    music.play();
+    isPlaying = true;
+  }, 800);
+}
+</script>
+</div>
 </body>
 </html>
-
-
 
